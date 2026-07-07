@@ -1,0 +1,75 @@
+name: FilterCycle
+options:
+  bundleIdPrefix: com.shimondeitel.filtercycle
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    DEVELOPMENT_TEAM: "W7Q885Q59C"
+    CODE_SIGN_STYLE: Automatic
+    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+targets:
+  FilterCycle:
+    type: application
+    platform: iOS
+    sources:
+      - path: FilterCycle
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.filtercycle
+        TARGETED_DEVICE_FAMILY: "1"
+        INFOPLIST_FILE: FilterCycle/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+        GENERATE_INFOPLIST_FILE: "NO"
+  FilterCycleTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: FilterCycleTests
+      - path: FilterCycle.storekit
+    dependencies:
+      - target: FilterCycle
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.filtercycle.tests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+  FilterCycleUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: FilterCycleUITests
+    dependencies:
+      - target: FilterCycle
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.shimondeitel.filtercycle.uitests
+        GENERATE_INFOPLIST_FILE: "YES"
+        TARGETED_DEVICE_FAMILY: "1"
+schemes:
+  FilterCycle:
+    build:
+      targets:
+        FilterCycle: all
+        FilterCycleTests: [test]
+        FilterCycleUITests: [test]
+    run:
+      config: Debug
+      storeKitConfiguration: FilterCycle.storekit
+    test:
+      config: Debug
+      storeKitConfiguration: FilterCycle.storekit
+      targets:
+        - FilterCycleTests
+        - FilterCycleUITests
+    archive:
+      config: Release
